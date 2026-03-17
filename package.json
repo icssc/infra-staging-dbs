@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "lint": "biome check --fix --error-on-warnings --unsafe",
+    "deploy": "sst deploy --stage production",
     "prepare": "husky"
   },
   "commitlint": {
@@ -12,7 +13,6 @@
   },
   "dependencies": {
     "pg": "8.20.0",
-    "pg-connection-string": "2.12.0",
     "pg-format": "1.0.4",
     "sst": "4.3.7",
     "zod": "4.3.6"

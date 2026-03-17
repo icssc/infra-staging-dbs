@@ -9,14 +9,15 @@ export async function handler(event: Event): Promise<Response> {
   eventSchema.parse(event);
 
   const { database, username } = names(event.repository, event.prNumber);
-  const adminUrl = Resource.DatabaseUrl.value;
+  const host = Resource.DatabaseHost.value;
+  const password = Resource.DatabasePassword.value;
 
-  const client = new Client({ connectionString: adminUrl });
+  const client = new Client({ host, port: 5432, user: "postgres", password });
   await client.connect();
 
   try {
     if (event.action === "create") {
-      return await handleCreate(client, adminUrl, database, username);
+      return await handleCreate(client, host, database, username);
     } else if (event.action === "destroy") {
       return await handleDestroy(client, database, username);
     }

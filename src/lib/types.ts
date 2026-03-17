@@ -22,7 +22,7 @@ export type Response = CreateResponse | DestroyResponse | ErrorResponse;
 
 export const eventSchema = z.object({
   action: z.enum(["create", "destroy"]),
-  repository: z.string().min(1),
+  repository: z.enum(["_test"]),
   prNumber: z.number().positive(),
 });
 

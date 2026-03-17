@@ -11,19 +11,15 @@ export default $config({
     };
   },
   async run() {
-    const stagingDbUrl = new sst.Secret("DatabaseUrl");
+    const dbHost = new sst.Secret("DatabaseHost");
+    const dbPassword = new sst.Secret("DatabasePassword");
 
-    const provisioner = new sst.aws.Function("DatabaseProvisioner", {
-      handler: "src/provisioner.handler",
+    new sst.aws.Function("DatabaseProvisioner", {
+      handler: "src/index.handler",
       runtime: "nodejs22.x",
       timeout: "60 seconds",
       memory: "512 MB",
-      link: [stagingDbUrl],
+      link: [dbHost, dbPassword],
     });
-
-    return {
-      provisionerName: provisioner.name,
-      provisionerArn: provisioner.arn,
-    };
   },
 });

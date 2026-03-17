@@ -6,7 +6,10 @@
     "useIgnoreFile": true
   },
   "files": {
-    "ignoreUnknown": false
+    "ignoreUnknown": false,
+    "includes": [
+      "!!sst-env.d.ts"
+    ]
   },
   "formatter": {
     "enabled": true,

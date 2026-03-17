@@ -1,5 +1,4 @@
 import type { Client } from "pg";
-import { parse } from "pg-connection-string";
 import format from "pg-format";
 import type { CreateResponse } from "./types";
 import {
@@ -11,7 +10,7 @@ import {
 
 export async function handleCreate(
   client: Client,
-  adminUrl: string,
+  host: string,
   database: string,
   username: string,
 ): Promise<CreateResponse> {
@@ -45,11 +44,9 @@ export async function handleCreate(
     format("GRANT ALL PRIVILEGES ON DATABASE %I TO %I", database, username),
   );
 
-  const parsed = parse(adminUrl);
-
   const url = buildPostgresUrl({
-    host: parsed.host || "localhost",
-    port: parsed.port ? Number(parsed.port) : 5432,
+    host,
+    port: 5432,
     database,
     username,
     password,

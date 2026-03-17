@@ -2,15 +2,25 @@
 /* tslint:disable */
 /* eslint-disable */
 /* deno-fmt-ignore-file */
+/* biome-ignore-all lint: auto-generated */
 
 declare module "sst" {
   export interface Resource {
-    DatabaseUrl: {
-      type: "sst.sst.Secret";
-      value: string;
-    };
+    "DatabaseHost": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
+    "DatabasePassword": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
+    "DatabaseProvisioner": {
+      "name": string
+      "type": "sst.aws.Function"
+    }
   }
 }
 /// <reference path="sst-env.d.ts" />
 
-import "sst";
+import "sst"
+export {}
