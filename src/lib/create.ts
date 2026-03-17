@@ -21,25 +21,33 @@ export async function handleCreate(
 
   if (!existingUser) {
     await client.query(
-      `CREATE ROLE ${escapeIdentifier(username)} 
-      LOGIN PASSWORD ${escapeLiteral(password)}`,
+      `
+      CREATE ROLE ${escapeIdentifier(username)} 
+      LOGIN PASSWORD ${escapeLiteral(password)}
+      `,
     );
   } else {
     await client.query(
-      `ALTER ROLE ${escapeIdentifier(username)} 
-      WITH LOGIN PASSWORD ${escapeLiteral(password)}`,
+      `
+      ALTER ROLE ${escapeIdentifier(username)} 
+      WITH LOGIN PASSWORD ${escapeLiteral(password)}
+      `,
     );
   }
 
   if (!existingDb) {
     await client.query(
-      `CREATE DATABASE ${escapeIdentifier(database)} 
-      OWNER ${escapeIdentifier(username)}`,
+      `
+      CREATE DATABASE ${escapeIdentifier(database)} 
+      OWNER ${escapeIdentifier(username)}
+      `,
     );
   } else {
     await client.query(
-      `ALTER DATABASE ${escapeIdentifier(database)} 
-      OWNER TO ${escapeIdentifier(username)}`,
+      `
+      ALTER DATABASE ${escapeIdentifier(database)} 
+      OWNER TO ${escapeIdentifier(username)}
+      `,
     );
   }
 
@@ -47,8 +55,10 @@ export async function handleCreate(
     `REVOKE ALL ON DATABASE ${escapeIdentifier(database)} FROM PUBLIC`,
   );
   await client.query(
-    `GRANT ALL PRIVILEGES ON DATABASE ${escapeIdentifier(database)} 
-    TO ${escapeIdentifier(username)}`,
+    `
+    GRANT ALL PRIVILEGES ON DATABASE ${escapeIdentifier(database)} 
+    TO ${escapeIdentifier(username)}
+    `,
   );
 
   const url = buildPostgresUrl({
