@@ -1,13 +1,28 @@
 {
   "name": "infra-staging-dbs",
   "version": "1.0.0",
-  "scripts": {},
-  "packageManager": "pnpm@10.32.1",
+  "scripts": {
+    "lint": "biome check --fix",
+    "prepare": "husky"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
   "dependencies": {
     "sst": "4.3.7"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.7",
-    "@types/aws-lambda": "8.10.161"
+    "@commitlint/cli": "20.5.0",
+    "@commitlint/config-conventional": "20.5.0",
+    "@types/aws-lambda": "8.10.161",
+    "husky": "9.1.7"
+  },
+  "packageManager": "pnpm@10.32.1",
+  "engines": {
+    "node": "24",
+    "pnpm": "10.32.1"
   }
 }
