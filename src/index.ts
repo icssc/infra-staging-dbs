@@ -2,8 +2,8 @@ import { Client } from "pg";
 import { Resource } from "sst";
 import { handleCreate } from "./lib/create";
 import { handleDestroy } from "./lib/destroy";
-import { type Event, eventSchema, type Response } from "./lib/types";
-import { names } from "./lib/util";
+import { Action, type Event, eventSchema, type Response } from "./lib/types";
+import { DB_PORT, names } from "./lib/util";
 
 export async function handler(event: Event): Promise<Response> {
   eventSchema.parse(event);
@@ -12,13 +12,18 @@ export async function handler(event: Event): Promise<Response> {
   const host = Resource.DatabaseHost.value;
   const password = Resource.DatabasePassword.value;
 
-  const client = new Client({ host, port: 5432, user: "postgres", password });
+  const client = new Client({
+    host,
+    port: DB_PORT,
+    user: "postgres",
+    password,
+  });
   await client.connect();
 
   try {
-    if (event.action === "create") {
+    if (event.action === Action.Deploy) {
       return await handleCreate(client, host, database, username);
-    } else if (event.action === "destroy") {
+    } else if (event.action === Action.Remove) {
       return await handleDestroy(client, database, username);
     }
     return {

@@ -3,6 +3,7 @@ import format from "pg-format";
 import { Action, type CreateResponse } from "./types";
 import {
   buildPostgresUrl,
+  DB_PORT,
   databaseExists,
   generatePassword,
   roleExists,
@@ -46,7 +47,7 @@ export async function handleCreate(
 
   const url = buildPostgresUrl({
     host,
-    port: 5432,
+    port: DB_PORT,
     username,
     password,
     database,

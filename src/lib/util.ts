@@ -1,6 +1,8 @@
 import { randomBytes } from "node:crypto";
 import type { Client } from "pg";
 
+export const DB_PORT = 5432;
+
 function sanitize(input: string) {
   return input
     .toLowerCase()
