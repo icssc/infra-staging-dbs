@@ -7,7 +7,23 @@ export default $config({
       removal: input?.stage === "production" ? "retain" : "remove",
       protect: ["production"].includes(input?.stage),
       home: "aws",
+      region: "us-east-1",
     };
   },
-  async run() {},
+  async run() {
+    const stagingDbUrl = new sst.Secret("DatabaseUrl");
+
+    const provisioner = new sst.aws.Function("DatabaseProvisioner", {
+      handler: "src/provisioner.handler",
+      runtime: "nodejs22.x",
+      timeout: "60 seconds",
+      memory: "512 MB",
+      link: [stagingDbUrl],
+    });
+
+    return {
+      provisionerName: provisioner.name,
+      provisionerArn: provisioner.arn,
+    };
+  },
 });
