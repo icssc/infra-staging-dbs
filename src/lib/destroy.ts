@@ -1,5 +1,4 @@
-import type { Client } from "pg";
-import format from "pg-format";
+import { type Client, escapeIdentifier } from "pg";
 import { Action, type DestroyResponse } from "./types";
 import { databaseExists, roleExists } from "./util";
 
@@ -19,11 +18,11 @@ export async function handleDestroy(
       [database],
     );
 
-    await client.query(format("DROP DATABASE %I", database));
+    await client.query(`DROP DATABASE ${escapeIdentifier(database)}`);
   }
 
   if (await roleExists(client, username)) {
-    await client.query(format("DROP ROLE %I", username));
+    await client.query(`DROP ROLE ${escapeIdentifier(username)}`);
   }
 
   return {

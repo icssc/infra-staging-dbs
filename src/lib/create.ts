@@ -1,5 +1,4 @@
-import type { Client } from "pg";
-import format from "pg-format";
+import { type Client, escapeIdentifier, escapeLiteral } from "pg";
 import { Action, type CreateResponse } from "./types";
 import {
   buildPostgresUrl,
@@ -22,27 +21,34 @@ export async function handleCreate(
 
   if (!existingUser) {
     await client.query(
-      format("CREATE ROLE %I LOGIN PASSWORD %L", username, password),
+      `CREATE ROLE ${escapeIdentifier(username)} 
+      LOGIN PASSWORD ${escapeLiteral(password)}`,
     );
   } else {
     await client.query(
-      format("ALTER ROLE %I WITH LOGIN PASSWORD %L", username, password),
+      `ALTER ROLE ${escapeIdentifier(username)} 
+      WITH LOGIN PASSWORD ${escapeLiteral(password)}`,
     );
   }
 
   if (!existingDb) {
     await client.query(
-      format("CREATE DATABASE %I OWNER %I", database, username),
+      `CREATE DATABASE ${escapeIdentifier(database)} 
+      OWNER ${escapeIdentifier(username)}`,
     );
   } else {
     await client.query(
-      format("ALTER DATABASE %I OWNER TO %I", database, username),
+      `ALTER DATABASE ${escapeIdentifier(database)} 
+      OWNER TO ${escapeIdentifier(username)}`,
     );
   }
 
-  await client.query(format("REVOKE ALL ON DATABASE %I FROM PUBLIC", database));
   await client.query(
-    format("GRANT ALL PRIVILEGES ON DATABASE %I TO %I", database, username),
+    `REVOKE ALL ON DATABASE ${escapeIdentifier(database)} FROM PUBLIC`,
+  );
+  await client.query(
+    `GRANT ALL PRIVILEGES ON DATABASE ${escapeIdentifier(database)} 
+    TO ${escapeIdentifier(username)}`,
   );
 
   const url = buildPostgresUrl({
