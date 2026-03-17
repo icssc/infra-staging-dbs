@@ -8,7 +8,7 @@ Usage of this handler should follow the flow of:
 
 On update PR, if `sst stage == staging_xxx`, then `invoke handler` with `action: deploy`, which returns a `DB_URL` that can be used in the app.
 
-On close PR, if `sst stage == staging_xxx`, then `invoke handler` with `action:remove` to remove the database.
+On close PR, if `sst stage == staging_xxx`, then `invoke handler` with `action: remove` to remove the database.
 
 ### Deploy
 
