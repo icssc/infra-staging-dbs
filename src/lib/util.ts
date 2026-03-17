@@ -62,7 +62,5 @@ export function buildPostgresUrl(input: {
     `postgresql://${username}:${password}@${host}:${port}/${database}`,
   );
 
-  url.searchParams.set("sslmode", "require");
-
   return url.toString();
 }
