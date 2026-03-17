@@ -2,5 +2,12 @@
   "name": "infra-staging-dbs",
   "version": "1.0.0",
   "scripts": {},
-  "packageManager": "pnpm@10.32.1"
+  "packageManager": "pnpm@10.32.1",
+  "dependencies": {
+    "sst": "4.3.7"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.7",
+    "@types/aws-lambda": "8.10.161"
+  }
 }
