@@ -38,6 +38,5 @@ export async function handleDestroy(
     ok: true,
     action: Action.Remove,
     database,
-    username,
   };
 }

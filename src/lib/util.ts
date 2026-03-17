@@ -12,7 +12,7 @@ function sanitize(input: string) {
 }
 
 export function names(repository: string, prNumber: number) {
-  const base = `${sanitize(repository)}_pr_${prNumber}`;
+  const base = `${sanitize(repository)}_staging_${prNumber}`;
   return {
     database: base.slice(0, 63),
     username: `${base}_user`.slice(0, 63),

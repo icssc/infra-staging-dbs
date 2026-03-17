@@ -19,7 +19,6 @@ export type DestroyResponse = {
   ok: true;
   action: Action.Remove;
   database: string;
-  username: string;
 };
 
 export type ErrorResponse = {
