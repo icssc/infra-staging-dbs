@@ -6,7 +6,14 @@ import { Action, type Event, eventSchema, type Response } from "./lib/types";
 import { DB_PORT, names } from "./lib/util";
 
 export async function handler(event: Event): Promise<Response> {
-  eventSchema.parse(event);
+  try {
+    eventSchema.parse(event);
+  } catch {
+    return {
+      ok: false,
+      error: "Invalid event",
+    };
+  }
 
   const { database, username } = names(event.repository, event.prNumber);
   const host = Resource.DatabaseHost.value;
