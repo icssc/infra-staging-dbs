@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "scripts": {
     "lint": "biome check --fix --error-on-warnings --unsafe",
-    "deploy": "sst deploy --stage production",
     "prepare": "husky"
   },
   "commitlint": {
@@ -29,6 +28,6 @@
   "packageManager": "pnpm@10.32.1",
   "engines": {
     "node": "22",
-    "pnpm": "10.32.1"
+    "pnpm": "10"
   }
 }
