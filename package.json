@@ -1,0 +1,6 @@
+{
+  "name": "infra-staging-dbs",
+  "version": "1.0.0",
+  "scripts": {},
+  "packageManager": "pnpm@10.32.1"
+}
