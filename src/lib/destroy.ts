@@ -1,7 +1,7 @@
-import type { Client } from "pg";
+import type {Client} from "pg";
 import format from "pg-format";
-import type { DestroyResponse } from "./types";
-import { databaseExists, roleExists } from "./util";
+import {Action, DestroyResponse} from "./types";
+import {databaseExists, roleExists} from "./util";
 
 export async function handleDestroy(
   client: Client,
@@ -28,7 +28,7 @@ export async function handleDestroy(
 
   return {
     ok: true,
-    action: "destroy",
+    action: Action.Remove,
     database,
     username,
   };

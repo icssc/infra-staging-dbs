@@ -1,6 +1,6 @@
 import type { Client } from "pg";
 import format from "pg-format";
-import type { CreateResponse } from "./types";
+import {Action, CreateResponse} from "./types";
 import {
   buildPostgresUrl,
   databaseExists,
@@ -54,7 +54,7 @@ export async function handleCreate(
 
   return {
     ok: true,
-    action: "create",
+    action: Action.Deploy,
     url,
   };
 }

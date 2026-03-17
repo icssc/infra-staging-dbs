@@ -1,14 +1,19 @@
 import { z } from "zod";
 
+export enum Action {
+  Deploy = "deploy",
+  Remove = "remove",
+}
+
 export type CreateResponse = {
   ok: true;
-  action: "create";
+  action: Action.Deploy;
   url: string;
 };
 
 export type DestroyResponse = {
   ok: true;
-  action: "destroy";
+  action: Action.Remove;
   database: string;
   username: string;
 };
@@ -21,7 +26,7 @@ export type ErrorResponse = {
 export type Response = CreateResponse | DestroyResponse | ErrorResponse;
 
 export const eventSchema = z.object({
-  action: z.enum(["create", "destroy"]),
+  action: z.enum([Action.Deploy, Action.Remove]),
   repository: z.enum(["_test"]),
   prNumber: z.number().positive(),
 });
