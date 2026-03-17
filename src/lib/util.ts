@@ -46,9 +46,9 @@ export async function roleExists(
 export function buildPostgresUrl(input: {
   host: string;
   port: number;
-  database: string;
   username: string;
   password: string;
+  database: string;
 }): string {
   const username = encodeURIComponent(input.username);
   const password = encodeURIComponent(input.password);

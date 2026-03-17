@@ -47,14 +47,18 @@ export async function handleCreate(
   const url = buildPostgresUrl({
     host,
     port: 5432,
-    database,
     username,
     password,
+    database,
   });
 
   return {
     ok: true,
     action: Action.Deploy,
     url,
+    host,
+    username,
+    password,
+    database,
   };
 }

@@ -9,6 +9,10 @@ export type CreateResponse = {
   ok: true;
   action: Action.Deploy;
   url: string;
+  host: string;
+  username: string;
+  password: string;
+  database: string;
 };
 
 export type DestroyResponse = {
