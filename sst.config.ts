@@ -17,7 +17,7 @@ export default $config({
       handler: "src/index.handler",
       runtime: "nodejs22.x",
       timeout: "60 seconds",
-      memory: "512 MB",
+      memory: "128 MB",
       link: [dbHost, dbPassword],
     });
   },

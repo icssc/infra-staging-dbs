@@ -32,7 +32,7 @@ export type Response = CreateResponse | DestroyResponse | ErrorResponse;
 export const eventSchema = z.object({
   action: z.enum([Action.Deploy, Action.Remove]),
   repository: z.enum(["_test"]),
-  prNumber: z.number().positive(),
+  prNumber: z.int().positive(),
 });
 
 export type Event = z.infer<typeof eventSchema>;
