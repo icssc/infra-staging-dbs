@@ -1,6 +1,6 @@
 import type { Client } from "pg";
 import format from "pg-format";
-import {Action, CreateResponse} from "./types";
+import { Action, type CreateResponse } from "./types";
 import {
   buildPostgresUrl,
   databaseExists,

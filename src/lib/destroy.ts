@@ -1,7 +1,7 @@
-import type {Client} from "pg";
+import type { Client } from "pg";
 import format from "pg-format";
-import {Action, DestroyResponse} from "./types";
-import {databaseExists, roleExists} from "./util";
+import { Action, type DestroyResponse } from "./types";
+import { databaseExists, roleExists } from "./util";
 
 export async function handleDestroy(
   client: Client,
