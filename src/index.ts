@@ -24,6 +24,7 @@ export async function handler(event: Event): Promise<Response> {
     port: DB_PORT,
     user: "postgres",
     password,
+    ssl: { rejectUnauthorized: false },
   });
   await client.connect();
 
