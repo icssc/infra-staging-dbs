@@ -18,10 +18,19 @@ export async function handleDestroy(
       [database],
     );
 
-    await client.query(`DROP DATABASE ${escapeIdentifier(database)}`);
+    await client.query(`GRANT ${escapeIdentifier(username)} TO CURRENT_USER`);
+    await client.query(`SET ROLE ${escapeIdentifier(username)}`);
+    try {
+      await client.query(`DROP DATABASE ${escapeIdentifier(database)}`);
+    } finally {
+      await client.query(`RESET ROLE`);
+    }
   }
 
   if (await roleExists(client, username)) {
+    await client.query(
+      `REVOKE ${escapeIdentifier(username)} FROM CURRENT_USER`,
+    );
     await client.query(`DROP ROLE ${escapeIdentifier(username)}`);
   }
 
