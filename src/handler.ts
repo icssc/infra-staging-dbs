@@ -1,9 +1,9 @@
 import { Client } from "pg";
 import { Resource } from "sst";
-import { handleCreate } from "./create";
-import { handleDestroy } from "./destroy";
-import { type Event, eventSchema, type Response } from "./types";
-import { names } from "./util";
+import { handleCreate } from "./lib/create";
+import { handleDestroy } from "./lib/destroy";
+import { type Event, eventSchema, type Response } from "./lib/types";
+import { names } from "./lib/util";
 
 export async function handler(event: Event): Promise<Response> {
   eventSchema.parse(event);
