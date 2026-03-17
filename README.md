@@ -6,9 +6,9 @@ This repository deploys a handler for provisioning and removing staging database
 ## Usage
 Usage of this handler should follow the flow of:
 
-On update PR, if `sst stage == staging_xxx`, then `invoke handler` with `action: deploy`, which returns a `DB_URL` that can be used in the app.
+On PR open, `invoke handler` with `action: deploy`, which returns `db credentials` that can be used in the app.
 
-On close PR, if `sst stage == staging_xxx`, then `invoke handler` with `action: remove` to remove the database.
+On PR close, `invoke handler` with `action: remove` to remove the database.
 
 ### Deploy
 
